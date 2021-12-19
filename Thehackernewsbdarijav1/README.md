@@ -467,12 +467,14 @@ undefined8 main(void)
 
 As we can see the password is "the password" and the secret output is "Vs3_l4ev3v_n33e_T4uDa0tO"
 
-Note : it's was the first version of the box the second one has the secret Th3_h4ck3r_l33t_P4sSw0rD! 
-To do : decrypt the cipher from v1
+Note : it's was the first version of the box the second one has the secret Th3_h4ck3r_l33t_P4sSw0rD!   
+To do : decrypt the cipher from v1  
+
+
+
+It's probably the password for the user c3p0 let's ssh  
 
 User flag : thnb{m4b9a_w4l0_4lm0jt4h1D}
-
-It's probably the password for the user c3p0 let's ssh
 
 ### Privsec
 
