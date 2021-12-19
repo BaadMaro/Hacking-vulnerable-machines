@@ -175,13 +175,14 @@ https://gist.github.com/nullenc0de/9cb36260207924f8e1787279a05eb773
 
 ```bash
 ┌──(kali㉿kali)-[~]
-└─$ wfuzz -c -z file,params.txt --hh 2347 -t 30 http192.168.1.106FUZZ=a                               130 ⨯
+└─$ wfuzz -c -z file,params.txt --hh 2347 -t 30 "http://192.168.1.106/?FUZZ=a"
+
  usrlibpython3dist-packageswfuzz__init__.py34 UserWarningPycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
 
  Wfuzz 3.1.0 - The Web Fuzzer                         
 
 
-Target http192.168.1.106FUZZ=a
+Target http://192.168.1.106/?FUZZ=a
 Total requests 10253
 
 =====================================================================
@@ -196,7 +197,7 @@ Filtered Requests 10252
 Requestssec. 0
 ```
 
-As we can see we found the parametre **search** let's interace with it
+As we can see we found the parametre **search** let's interact with it
 
 http://192.168.1.106/?search=11111111
 - It's always show the same input in the results
