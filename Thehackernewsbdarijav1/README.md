@@ -465,14 +465,32 @@ undefined8 main(void)
 }
 ```
 
-As we can see the password is "the password" and the secret output is "Vs3_l4ev3v_n33e_T4uDa0tO"
+As we can see the password is "the password" and the secret output is "Vs3_l4ev3v_n33e_T4uDa0tO" [v1 machine ova]
 
-Note : it's was the first version of the box the second one has the secret Th3_h4ck3r_l33t_P4sSw0rD!   
-To do : decrypt the cipher from v1  
+Note : it's was the first version of the box the second one has the secret the text What is Thehackernewsbdarija password?  
 
+By checking the format of the secret probably a cipher let's try some known and most used cihpers in challenges like ceaser,substitution, vignere.. 
+- Ceaser cipher : i checked all shifts no clear plaintext
+- Vigenre cipher : using https://www.dcode.fr/vigenere-cipher to have multiple results with the automatic decryption feature
 
+![image](https://user-images.githubusercontent.com/72421091/146690136-f4d5f3e9-477a-43cb-a3d3-306094de4fde.png)
+
+As we see we have a repeated value in the key "CL" that detect the first part as "TH3" which is "The"
+
+Let's use "CL" as the key : Th3_j4tt3k_l33t_R4jBp0rD
+
+We found 2 parts the can be a possible plaintext : l33t and 0rD
+
+- l33t is leet / 1337
+- 0rd the last part from "passw0rd"
+
+Now let's add a charactere to the key (trying default alphabets ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+
+The key "CLE" show the plaintext "Th3_h4ck3r_l33t_P4sSw0rD!" 
 
 It's probably the password for the user c3p0 let's ssh  
+
+SSH and read flag.txt from the home directory
 
 User flag : thnb{m4b9a_w4l0_4lm0jt4h1D}
 
