@@ -167,7 +167,7 @@ http://192.168.1.106 [200 OK] Adobe-Flash, Apache[2.4.29], Country[RESERVED][ZZ]
 
 We have no clue about the web application, let's start with some directory brutforcing 
 
-- I searched for some communs extentions and use gobuster to find directories and files i found onlt the http://192.168.1.106/server-status shwoing 403  
+- I searched for some communs extentions and use gobuster to find directories and files i found only the http://192.168.1.106/server-status showing 403   
 
 I tried to search for some parametres using wfuzz  
 
