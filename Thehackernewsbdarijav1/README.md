@@ -495,7 +495,7 @@ SSH and read flag.txt from the home directory
 
 User flag : thnb{m4b9a_w4l0_4lm0jt4h1D}
 
-### Privsec
+### Privesc
 
 Let's start by checking if we can run something as root
 ```bash
